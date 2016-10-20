@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <section name="seleniumSettings" type="OpenGI.Selenium.Configuration.SeleniumSettingsSection, OpenGI.Selenium" />
+    
+  <section name="specFlow" type="TechTalk.SpecFlow.Configuration.ConfigurationSectionHandler, TechTalk.SpecFlow" /></configSections>
+  <appSettings>
+
+    <add key="BaseUrl" value="http://test-ebrokerdemo/ebroker4/motor/goskippy-motor.index.html" />
+    <add key="timeToSleep" value="1" />
+    <add key="AccordionTransitionWait" value="8000" />
+  </appSettings>
+  <seleniumSettings>
+    <!-- Browser: PhantomJs, GoogleChrome -->
+    <browser selected="GoogleChrome" />
+  </seleniumSettings>
+  <specFlow>
+    <stepAssemblies>
+      <stepAssembly assembly="OpenGI.Ecom.Automation.Selenium.Framework" />
+    <stepAssembly assembly="SpecResults" /></stepAssemblies>
+    
+  <!-- For additional details on SpecFlow configuration options see http://go.specflow.org/doc-config --><!-- For additional details on SpecFlow configuration options see http://go.specflow.org/doc-config --><unitTestProvider name="NUnit" /></specFlow>
+<startup><supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2" /></startup>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="TechTalk.SpecFlow" publicKeyToken="0778194805d6db41" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-2.0.0.0" newVersion="2.0.0.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+</configuration>

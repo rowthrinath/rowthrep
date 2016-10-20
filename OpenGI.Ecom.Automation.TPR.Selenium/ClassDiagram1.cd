@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.Attributes.ErrorPanelAttribute" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Attributes\ErrorPanelAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.FeatureFiles.BusinessActivitiesFeature" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kAAAQCEBCAABAAEAAAAAACiAAIgQCUAAAAAAAAAwQQg=</HashCode>
+      <FileName>FeatureFiles\BusinessActivities.feature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.FeatureFiles.DeclarationsFeature" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAABAAEAAAAAACIAAAgACAAAAEACAAAAAQg=</HashCode>
+      <FileName>FeatureFiles\Declarations.feature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.FeatureFiles.EndToEndFeature" Collapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAABAAEAAAAAACAAAAgAiAAAAAAAAAAAAQg=</HashCode>
+      <FileName>FeatureFiles\EndToEnd.feature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.FeatureFiles.FurtherInformationFeature" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAQAAAgAAABAAEAAQAAECgAAAgICAAAAAAAAABAAQg=</HashCode>
+      <FileName>FeatureFiles\FurtherInformation.feature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.FeatureFiles.YourBusinessFeature" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAAAAAlAABAAEBAAAAACQABAgACAAAAAAAAAAAAQg=</HashCode>
+      <FileName>FeatureFiles\YourBusiness.feature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.FeatureFiles.YourDetailsFeature" Collapsed="true">
+    <Position X="19.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAIAAwAAABASEAAAAAACAAAAoQCAAAAAEAAAAAAQg=</HashCode>
+      <FileName>FeatureFiles\YourDetails.feature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.PageObjects.BusinessActivitiesPage" Collapsed="true">
+    <Position X="3" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgDAcEAAEAAEAAAADAICAgBAggAhgAAEAAAEgAAAAIA=</HashCode>
+      <FileName>PageObjects\BusinessActivitiesPage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.PageObjects.DeclarationsPage" Collapsed="true">
+    <Position X="5.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEIAAACAAAIABAICIAAAAAAAAAAAAQCAAAAAAAA=</HashCode>
+      <FileName>PageObjects\DeclarationsPage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.PageObjects.FurtherInformationPage" Collapsed="true">
+    <Position X="7.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAARGAgAACAAAQABAICwBAAAEAAAAAAAAAICgABAAA=</HashCode>
+      <FileName>PageObjects\FurtherInformationPage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.PageObjects.YourBusinessPage" Collapsed="true">
+    <Position X="9.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAEAAIAAACAAABAIGAAAAAAAAAAAAAAAChAAAAAA=</HashCode>
+      <FileName>PageObjects\YourBusinessPage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.PageObjects.YourDetailsPage" Collapsed="true">
+    <Position X="12" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAIKAAAEQABAICAAAABAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>PageObjects\YourDetailsPage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.StepDefinitions.GivenBindings" Collapsed="true">
+    <Position X="5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAIAAAAAAAAAAAAAAAAAAAAAAAAAAIACAAAAAAABAAA=</HashCode>
+      <FileName>StepDefinitions\GivenBindings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.StepDefinitions.ThenBindings" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIACAAAAAAQAAAAhAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StepDefinitions\ThenBindings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGI.Ecom.Automation.TPR.Selenium.StepDefinitions.WhenBindings" Collapsed="true">
+    <Position X="2.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StepDefinitions\WhenBindings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

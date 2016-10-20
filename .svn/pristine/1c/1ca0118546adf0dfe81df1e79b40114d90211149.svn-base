@@ -1,0 +1,143 @@
+﻿Feature: eBroker4 SmokeTest
+This test will be run to make a quick check on eBroker4 application to check if an user can generate a quote
+
+Background: 
+Given I have launched in to eBrokerDemo
+	Then I should see 4 tabs on the page
+	And I should see the following tabs
+	| Tab     |
+	| POLICY  |
+	| VEHICLE |
+	| DRIVER  |
+	| QUOTE   |	
+
+@eBroker4SmokeTest
+Scenario:01 Fill in all pages and get to Summary page
+###################################################
+Then I should be on the POLICY tab
+When I click the following buttons
+		| Question    | Data |
+		| TitleButton | Mr   |		
+When I populate the following questions
+         | Question       | Data          |
+         | FirstName      | Test          |
+         | Surname        | Test          |
+         | ContactNumber  | 012347566     |
+		 | CoverStartDate | 11/11/2016    |
+         | PrimaryEmail   | test@test.com |
+When I click Next expecting an accordion transition
+###################################################
+Then I should be on the VEHICLE tab
+When I click the following buttons
+		| Question                            | Data |
+		| Are_you_the_owner_and_keeper_Button | Yes   |		
+When I populate the following questions
+         | Question                              | Data       |
+         | When_was_your_car_purchased_DateInput | 01/01/2001 |		   
+When I click the following buttons
+		| Question                                    | Data  |
+		| Where_do_you_park_your_car_overnight_Button | Other |		
+When I select the following questions
+        | Question                                         | Data             |
+        | Where_do_you_park_your_car_overnight_SelectOther | UnlockedBuilding |		
+When I click the following buttons
+		| Question                   | Data          |
+		| Your_Level_Of_Cover_Button | Comprehensive |		
+When I click the following buttons
+		| Question                         | Data |
+		| Do_You_Require_Windscreen_Button | Yes  |		
+When I select the following questions
+         | Question                     | Data |
+         | Your_Voluntary_Excess_Select | £50  |		 
+         | Your_NCB_Select | 3            |          
+When I click the following buttons
+		| Question                          | Data |
+		| Would_you_protect_your_NCB_Button | Yes  |		
+When I select the following questions
+         | Question                           | Data           |
+         | Where_Did_you_earn_your_NCB_Select | United Kingdom |
+When I select the following questions
+         | Question                                 | Data        |
+         | What_type_of_car_did_you_earn_NCB_Select | Private Car |		 
+When I select the following questions
+         | Question                                    | Data         |
+         | Who_will_be_insured_to_drive_the_car_Select | Insured Only |		 
+When I click the following buttons
+		| Question                  | Data |
+		| Additional_drivers_Button | Zero |		
+When I click Next expecting an accordion transition
+########################################################
+Then I should be on the DRIVER tab
+When I populate the following questions
+         | Question          | Data       |
+         | DateOfBirth_Input | 01/01/1977 |
+When I click the following buttons
+		| Question             | Data    |
+		| MaritalStatus_Button | Married |		
+When I populate the following questions
+         | Question            | Data |
+         | HowLongLiveUK_Input | 15   |
+When I click the following buttons
+		| Question                | Data     |
+		| YourPolicyStatus_Button | Frequent |
+When I click the following buttons
+		| Question               | Data  |
+		| YourLicenceType_Button | Other |		
+When I select the following questions
+         | Question                     | Data           |
+         | YourLicenceType_Other_Option | Never Held     |
+         | WhereWasLicenceIssued_Option | United Kingdom |
+When I populate the following questions
+         | Question                     | Data |
+         | HowLongHeldYourLicence_Input | 5    |
+When I click the following buttons
+		| Question                      | Data  |
+		| HowLongHeldYourLicence_Button | Years |	
+		| Do_you_drive_another_vehicle_Button | Yes  |
+When I click the following buttons
+		| Question                            | Data |
+		| Do_you_drive_Company_vehicle_Button | Yes  |		
+ 		| Are_you_the_only_one_drives_Company_vehicle_Button | Yes  |
+When I populate the following questions
+         | Question                                         | Data |
+         | How_long_have_been_driving_company_vehicle_Input | 5    |
+
+When I click the following buttons
+		| Question                                     | Data |
+		| Have_you_had_any_accidents_Button            | Yes  |
+		| Accidents_was_the_accident_your_fault_Button | Yes  |	
+When I select the following questions
+         | Question                                 | Data            |
+         | What_type_of_incident_occured_Option     | Accident        |
+         | What_were_the_details_of_accident_Option | Hit TP in Front |
+When I click the following buttons
+		| Question                                     | Data    |
+		| Which_policy_was_the_accident_against_Button | Company |
+		| Was_your_NCB_lost_Button                     | Yes     |
+		| Did_Accident_cause_bodily_injury_Button      | Yes     |
+When I populate the following questions
+         | Question                                               | Data       |
+         | What_was_the_value_of_personal_injury_settlement_Input | 1000       |
+         | When_did_accident_occur_Input                          | 01/01/2000 |
+         | Cost_recovered_from_third_party_Input                  | 800        |
+         | Total_value_of_claim_Input                             | 1500       |
+When I click the following buttons
+		| Question                                     | Data |
+		| Has_this_claim_been_settled_Button           | Yes  |
+When I click the following buttons
+		| Question                                      | Data         |
+		| Have_you_had_any_convictions_in_5years_Button | Yes          |
+When I populate the following questions
+         | Question                              | Data       |
+         | What_was_the_date_of_conviction_Input | 01/01/2010 |
+         | Fine_Input                            | 1000       |
+         | Points_Input                          | 6          |
+         | Period_of_disqualification_Input      | 3          |
+         | Offence_code_number_Input             | 22         |
+When I click the following buttons
+		| Question                                | Data   |
+		| Period_of_disqualification_units_Button | Months |
+When I select the following questions
+         | Question            | Data |
+         | Offence_code_Option | AC   |
+		 

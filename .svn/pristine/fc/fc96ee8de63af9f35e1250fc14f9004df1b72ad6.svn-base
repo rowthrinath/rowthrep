@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="RunTests" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+
+    <PropertyGroup>
+		<WorkingDirectory Condition="'$(WorkingDirectory)' == ''">$(MSBuildStartupDirectory)</WorkingDirectory>
+        <IncludePattern>$(WorkingDirectory)\Output\*.TPR.Selenium.dll</IncludePattern>
+        <OutputXmlFile>$(WorkingDirectory)\nunit-results.xml</OutputXmlFile>
+    </PropertyGroup>
+
+    <!-- You must build the solution first as this looks in the output for compiled code to test. -->
+    <Target Name="GetTestAssemblies">
+        <CreateItem Include="$(IncludePattern)"
+                    AdditionalMetadata="TestContainerPrefix=/testcontainer:">
+            <Output TaskParameter="Include" ItemName="TestAssemblies"/>
+        </CreateItem>
+    </Target>
+
+    <!-- We're running the unit tests using the community task which in turn calls the nunit-console -->
+    <Target Name="RunTests" DependsOnTargets="GetTestAssemblies">
+        <Message Text="Run Nunit tests on all projects that match the pattern: $(TestPattern)" />
+        <NUnit Condition="'@(TestAssemblies)'!=''"
+               Assemblies="@(TestAssemblies)"
+               ContinueOnError="true"
+               ToolPath="$(MSBuildProgramFiles32)\NUnit 2.6.3\bin"
+               DisableShadowCopy="true"
+               OutputXmlFile="$(OutputXmlFile)" />
+			   <Message Text="Done $(WorkingDirectory)" />
+    </Target>
+
+</Project>

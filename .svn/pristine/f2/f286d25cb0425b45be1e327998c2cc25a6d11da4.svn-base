@@ -1,0 +1,288 @@
+﻿using NUnit.Framework;
+using OpenGI.Ecom.Automation.Selenium.Framework.Attributes;
+using OpenGI.Ecom.Automation.Selenium.Framework.ExtensionMethods;
+using OpenGI.Ecom.Automation.Selenium.Framework.PageObjects;
+using OpenGI.Selenium.Infrastructure;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
+using TechTalk.SpecFlow;
+using OpenGI.Selenium.Extensions;
+using OpenGI.Selenium.Helpers;
+using System.Configuration;
+
+namespace OpenGI.Ecom.Automation.Selenium.Framework.StepDefinitions
+{
+    /// <summary>
+    /// Step definition helpers
+    /// </summary>
+    public static class StepDefinitionHelpers
+    {
+        /// <summary>
+        /// Gets the question.
+        /// </summary>
+        /// <param name="question">The question.</param>
+        /// <param name="scenarioContext">The scenario context.</param>
+        /// <returns></returns>
+        public static object GetQuestion(string question, ScenarioContext scenarioContext)
+        {
+            var dataCapturePage = (BaseDataCapturePage)scenarioContext["page"];
+
+            return GetQuestionPropertyInfo(question, scenarioContext).GetValue(dataCapturePage, null);
+        }
+
+        /// <summary>
+        /// Gets the question custom attributes.
+        /// </summary>
+        /// <param name="question">The question.</param>
+        /// <param name="scenarioContext">The scenario context.</param>
+        /// <returns></returns>
+        public static object[] GetQuestionCustomAttributes(string question, ScenarioContext scenarioContext)
+        {
+            var dataCapturePage = (BaseDataCapturePage)scenarioContext["page"];
+
+            return GetQuestionPropertyInfo(question, scenarioContext).GetCustomAttributes(false);
+        }
+
+        /// <summary>
+        /// Gets the question property information.
+        /// </summary>
+        /// <param name="question">The question.</param>
+        /// <param name="scenarioContext">The scenario context.</param>
+        /// <returns></returns>
+        public static PropertyInfo GetQuestionPropertyInfo(string question, ScenarioContext scenarioContext)
+        {
+            var dataCapturePage = (BaseDataCapturePage)scenarioContext["page"];
+
+            return dataCapturePage.GetType().GetProperty(question);
+        }
+
+        /// <summary>
+        /// Gets the type of the question property.
+        /// </summary>
+        /// <param name="question">The question.</param>
+        /// <param name="scenarioContext">The scenario context.</param>
+        /// <returns></returns>
+        public static Type GetQuestionPropertyType(string question, ScenarioContext scenarioContext)
+        {
+            return GetQuestionPropertyInfo(question, scenarioContext).PropertyType;
+        }
+
+        /// <summary>
+        /// Determines whether [is i web element question] [the specified name].
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="scenarioContext">The scenario context.</param>
+        /// <returns></returns>
+        public static bool IsIWebElementQuestion(string name, ScenarioContext scenarioContext)
+        {
+            return GetQuestionPropertyType(name, scenarioContext) == typeof(IWebElement);
+        }
+
+        /// <summary>
+        /// Determines whether [is RadioButton question] [the specified name].
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="scenarioContext">The scenario context.</param>
+        /// <returns></returns>
+        public static bool IsRadioButtonQuestion(string name, ScenarioContext scenarioContext)
+        {
+            return GetQuestionPropertyType(name, scenarioContext) == typeof(IList<IWebElement>);
+        }
+
+        /// <summary>
+        /// Determines whether [is select element question] [the specified name].
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="scenarioContext">The scenario context.</param>
+        /// <returns></returns>
+        public static bool IsSelectElementQuestion(string name, ScenarioContext scenarioContext)
+        {
+            return GetQuestionPropertyType(name, scenarioContext) == typeof(SelectElement);
+        }
+
+
+        public static IWebDriver GetDriver(ScenarioContext scenarioContext)
+        {
+            var dataCapturePage = (BaseDataCapturePage)scenarioContext["page"];
+
+            return dataCapturePage.Driver;
+        }
+
+
+	 public static void SelectListDataForTable(Table table, ScenarioContext scenarioContext,string data=null)
+        {
+            IWebDriver driver= StepDefinitionHelpers.GetDriver(scenarioContext);
+            foreach (var row in table.Rows)
+            {
+                string Inputdata = row["Data"].ToString();
+                if (StepDefinitionHelpers.IsIWebElementQuestion(row["Question"], scenarioContext))
+                {
+                    var question = StepDefinitionHelpers.GetQuestion(row["Question"], scenarioContext) as IWebElement;
+
+                        if (row.Keys.Contains("Data"))
+                        {
+                            Thread.Sleep(1000);
+                            question.Click();
+                            var attributes = StepDefinitionHelpers.GetQuestionCustomAttributes(row["Question"], scenarioContext);
+
+                            SelectorFindsBy findsBy = (SelectorFindsBy) attributes.SingleOrDefault(c => c.GetType() == typeof(SelectorFindsBy));
+                            Thread.Sleep(1000);
+                            IList<IWebElement> optionlist = driver.FindElements(findsBy.By);
+
+                            foreach (IWebElement e in optionlist)
+                            {
+                                if (e.Text == (Inputdata))
+                                {
+                                     e.Click();
+                                }
+                            }
+                            
+                            optionlist = null;
+                        }
+                    }
+                }
+
+        }
+
+        public static void SelectButtonDataForTable(Table table, ScenarioContext scenarioContext, string data = null)
+        {
+            IWebDriver driver = StepDefinitionHelpers.GetDriver(scenarioContext);
+            foreach (var row in table.Rows)
+            {                
+                string Inputdata = row["Data"].ToString();
+                if (StepDefinitionHelpers.IsIWebElementQuestion(row["Question"], scenarioContext))
+                {
+                    var question = StepDefinitionHelpers.GetQuestion(row["Question"], scenarioContext) as IWebElement;
+
+                    if (!string.IsNullOrEmpty(data))
+                    {
+                        question.Displayed.Equals(true);
+                        question.SendKeys(data);
+                    }
+                    else
+                    {
+                        if (row.Keys.Contains("Data"))
+                        {                            
+                            var attributes = StepDefinitionHelpers.GetQuestionCustomAttributes(row["Question"], scenarioContext);
+
+                            SelectorFindsBy findsBy = (SelectorFindsBy)attributes.SingleOrDefault(c => c.GetType() == typeof(SelectorFindsBy));
+                           
+                            IList<IWebElement> optionlist = driver.FindElements(findsBy.By);
+
+
+                            foreach (IWebElement e in optionlist)
+                            {
+                                if (e.Text == (Inputdata))
+                                {
+                                    Thread.Sleep(500);
+                                    e.Click();
+                                }
+                            }
+                            
+                            optionlist = null;
+                        }
+                    }
+                }
+
+
+            }
+
+        }
+
+        public static void PopulateDataForTable(Table table, ScenarioContext scenarioContext,string data = null)
+        {
+            foreach (var row in table.Rows)
+            {
+                if (StepDefinitionHelpers.IsIWebElementQuestion(row["Question"], scenarioContext))
+                {
+                    var question = StepDefinitionHelpers.GetQuestion(row["Question"], scenarioContext) as IWebElement;
+
+                    question.Clear();
+                    if (!string.IsNullOrEmpty(data))
+                    {
+                        question.Displayed.Equals(true);
+                        question.SendKeys(data);
+                    }
+                    else 
+                    {
+                        if (row.Keys.Contains("Data"))
+                        {
+                            question.SendKeys(row["Data"]);
+                        }
+                        else
+                        {
+                            question.SendKeys(Guid.NewGuid().ToString());
+                        }
+                    }
+                }
+                else if (StepDefinitionHelpers.IsSelectElementQuestion(row["Question"], scenarioContext))
+                {
+                    if (row.Keys.Contains("Data") && !string.IsNullOrEmpty(row["Data"])) 
+                    { 
+                        (StepDefinitionHelpers.GetQuestion(row["Question"], scenarioContext) as SelectElement)
+                            .SelectByText(row["Data"]);
+                    }
+                    else
+                    {
+                        (StepDefinitionHelpers.GetQuestion(row["Question"], scenarioContext) as SelectElement)
+                            .ClickRandomOption();
+                    }
+                }
+                
+                else if (StepDefinitionHelpers.IsRadioButtonQuestion(row["Question"], scenarioContext))
+                {
+                    var questions = StepDefinitionHelpers.GetQuestion(row["Question"], scenarioContext) as IList<IWebElement>;
+
+                    if (questions.First().Displayed)
+                    {
+                        questions.ClickRadioButtonLabel(
+                            string.Equals(
+                                row["Data"],
+                                "yes",
+                                StringComparison.InvariantCultureIgnoreCase), StepDefinitionHelpers.GetDriver(scenarioContext));
+                    }
+                }
+
+            }
+        }
+
+        public static HelpTextAttribute GetQuestionHelpTextSelector(string questionName, ScenarioContext ScenarioContext)
+        {
+            var propertyInfo = GetQuestionPropertyInfo(questionName, ScenarioContext);
+            var helpTextAttribute = propertyInfo.GetCustomAttribute(typeof(HelpTextAttribute),false) as HelpTextAttribute;
+            return helpTextAttribute;
+
+        }
+
+        public static int PopulateAutoCompleteList(Table table,ScenarioContext scenarioContext)
+        {
+            var alphabets = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9";
+
+            var baseDataCapturePage = scenarioContext["page"] as BaseDataCapturePage;
+            StepDefinitionHelpers.GetDriver(scenarioContext).Manage().Timeouts().ImplicitlyWait(new TimeSpan(0, 0, 0, 0, 500));
+
+            foreach (var alphabet in alphabets.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                StepDefinitionHelpers.PopulateDataForTable(table, scenarioContext, alphabet);
+                try
+                {
+                    PageObjectHelpers.GetWait(1).Until(
+                        d => baseDataCapturePage.AutocompleteWrapper != null);
+
+                    if (baseDataCapturePage.AutocompleteItems.Count > 0)
+                        return baseDataCapturePage.AutocompleteItems.Count;
+                }
+                catch (Exception ex) { }
+            }
+            StepDefinitionHelpers.GetDriver(scenarioContext).Manage().Timeouts().ImplicitlyWait(new TimeSpan(0, 0, int.Parse(ConfigurationManager.AppSettings["timeToSleep"])));
+            return 0;
+        }
+
+    }
+}

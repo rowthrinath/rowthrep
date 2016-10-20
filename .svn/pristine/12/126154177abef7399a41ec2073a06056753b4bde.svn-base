@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+        <WorkingDirectory Condition="'$(WorkingDirectory)' == ''">$(MSBuildStartupDirectory)</WorkingDirectory>
+        <Solution>$(WorkingDirectory)\OpenGI.Ecom.Automation.sln</Solution>
+        <OutDir>$(WorkingDirectory)\Output\</OutDir>
+        <VisualStudioVersion>12.0</VisualStudioVersion>
+    </PropertyGroup>
+
+    <Target Name="Build" DependsOnTargets="BuildSolution;RunSeleniumTests" />
+
+    <Target Name="BuildSolution">
+        <MSBuild Projects="$(Solution)"
+                 Properties="VisualStudioVersion=$(VisualStudioVersion);
+                             WarningLevel=0;
+                             Configuration=$(Configuration);
+                             OutDir=$(OutDir);" />
+    </Target>
+	
+	<Target Name="RunSeleniumTests">
+        <MSBuild Projects="$(MSBuildProjectDirectory)\RunSeleniumTests.msbuild"
+                 Properties="WorkingDirectory=$(WorkingDirectory);" />
+    </Target>
+
+    <!-- <Target Name="PackageOutput">
+        <Delete Files="$(WebProjectOutputDir)\Web.config" />
+    </Target> -->
+
+</Project>

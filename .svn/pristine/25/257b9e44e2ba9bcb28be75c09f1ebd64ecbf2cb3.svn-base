@@ -1,0 +1,7 @@
+param([String]$configLocation='')
+
+$xml = [xml](Get-Content (Resolve-Path $configLocation))
+
+$xml.configuration.seleniumSettings.browser.selected = "PhantomJs"	# set back to PhantomJS for Bamboo run
+
+$xml.Save((Resolve-Path $configLocation))
